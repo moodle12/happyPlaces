@@ -2,7 +2,7 @@ const businessModel = require("../model/businessModel")
 
 module.exports.addBusiness = function (req, res) {
     let businessID = parseInt(Math.random()*1000000)
-    let userID = parseInt(Math.random()*1000000)
+    let user = req.body.user
     let businessType = req.body.businessType
     let businessAddress = req.body.businessAddress
     let consumerContact = req.body.consumerContact
@@ -11,7 +11,7 @@ module.exports.addBusiness = function (req, res) {
     let business = new businessModel(
         { 
             "businessID": businessID, 
-            "userID": userID,
+            "user": user,
             "businessType": businessType,
             "businessAddress": businessAddress,
             "consumerContact":consumerContact,
@@ -39,7 +39,7 @@ module.exports.addBusiness = function (req, res) {
 
 //getAllBusiness
 module.exports.getAllBusiness = function(req,res){
-    businessModel.find(function(err,data){
+    businessModel.find().populate("user").exec(function(err,data){
         console.log(err);
         if(err){
             res.json({

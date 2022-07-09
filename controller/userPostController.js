@@ -1,14 +1,14 @@
 const UserPostModel = require("../model/userPostModel")
 
 module.exports.addUserPost = function (req, res) {
-    let  userID = parseInt(Math.random()*1000000)
-    let  postID = parseInt(Math.random()*1000000)
+    let  user = req.body.user
+    let  post = req.body.post
     let postCount = req.body.postCount
 
     let userPost = new UserPostModel(
         { 
-            "userID": userID,
-            "postID": postID,  
+            "user": user,
+            "post": post,  
             "postCount": postCount
         }
     )
@@ -33,7 +33,7 @@ module.exports.addUserPost = function (req, res) {
 
 //getAllUserPosts
 module.exports.getAllUserPosts = function(req,res){
-    UserPostModel.find(function(err,data){
+    UserPostModel.find().populate("user").populate("post").exec(function(err,data){
         console.log(err);
         if(err){
             res.json({

@@ -6,6 +6,8 @@ const businessController = require("./controller/businessController")
 const userPostController = require("./controller/userPostController")
 const placesController = require("./controller/placesController")
 const activityController = require("./controller/activityController")
+const postController = require("./controller/postController")
+const bookingController = require("./controller/bookingController")
 const mongoose = require("mongoose");
 const app = express()
 
@@ -42,6 +44,18 @@ app.delete('/user',userController.deleteUser)
 app.put('/user',userController.updateUser)
 //user--api
 
+//table 3 booking
+app.post("/booking",bookingController.addBooking)
+app.delete("/booking",bookingController.deletebooking)
+app.put("/booking",bookingController.updatebooking)
+app.get("/booking",bookingController.getAllbooking)
+
+// table 4 Activity
+app.post("/activity",activityController.addActivity)
+app.delete("/activity",activityController.deleteActivity)
+app.put("/activity",activityController.updateActivity)
+app.get("/activity",activityController.getAllActivity)
+//Activity
 
 //customerFeedback--api
 app.get('/customerFeedback',customerFeedbackController.getAllCustomerFeedback)
@@ -57,6 +71,13 @@ app.post('/business',businessController.addBusiness)
 app.delete('/business',businessController.deleteBusiness)
 app.put('/business',businessController.updateBusiness)
 //business--api
+
+// table 5 posts
+app.post("/post",postController.addPost)
+app.delete("/post",postController.deletePost)
+app.put("/post",postController.updatePost)
+app.get("/post",postController.getAllPosts)
+//posts
 
 //userPost--api
 app.get('/userPost',userPostController.getAllUserPosts)

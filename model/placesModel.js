@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 
 const placeSchema = new mongoose.Schema({
-    userID:{
-        type:Number
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+         ref:"User"
     },
     placeID:{
         type:Number,
@@ -21,8 +22,9 @@ const placeSchema = new mongoose.Schema({
     isApproved:{
         type:Boolean
     },
-    activityID:{
-        type:Number
+    activity:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Activity"
     },
     title:{
         type:String

@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 
 const UserPostSchema = new mongoose.Schema({
-    userID:{
-        type:Number
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
     },
-    postID:{
-        type:Number
+    post:{
+        type:mongoose.Schema.Types.ObjectId,
+         ref:"Post"
     },
     postCount:{
         type:Number

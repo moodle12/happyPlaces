@@ -11,8 +11,9 @@ const businessSchema = new mongoose.Schema({
     businessAddress:{
         type:String
     },
-    userID:{
-        type:Number
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
     },
     consumerContact:{
         type:Number

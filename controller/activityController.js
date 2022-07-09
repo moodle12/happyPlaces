@@ -2,12 +2,12 @@
 const activitymodel = require("../model/activityModel")
 module.exports.addActivity= function(req,res)
 {
-    let actId = parseInt(Math.random)*10000
+     let actId = parseInt((Math.random()*10000))
     let actType = req.body.actType
 
     let activity = new activitymodel(
         {
-            "actId":actId,
+             "actId":actId,
             "actType":actType
         }
     )
@@ -16,7 +16,7 @@ module.exports.addActivity= function(req,res)
         {
             console.log(err);
                 res.json({
-                    "msg":"activity  not added",
+                    msg:"activity  not added",
                     status:-1,
                     data:"SWR"
                 })   
@@ -24,7 +24,7 @@ module.exports.addActivity= function(req,res)
         else
         {
             res.json({
-                "msg":"Activity Added  Succesfully",
+                msg:"Activity Added  Succesfully",
                 status:200,
                 data:sucess
             })
@@ -58,15 +58,11 @@ module.exports.getAllActivity = function (req,res)
 
 module.exports.updateActivity = function(req,res)
 {
-    let actId = req.body.actId
+     let actId = req.body.actId
     let actType = req.body.actType
     
 
-    activitymodel.updateOne(
-        {"actId":actId},
-        {"actType":actType} 
-               
-    ),function(err,succes)
+    activitymodel.updateOne({_id:actId}, {"actType":actType} ,function(err,succes)
     {
         console.log(err);
         if(err)
@@ -84,13 +80,13 @@ module.exports.updateActivity = function(req,res)
                 data:succes
             })
         }   
-    }
+    })
 }// end of  update Activity
 
 module.exports.deleteActivity = function (req,res)
 {
     let actId = req.body.actId
-    activitymodel.deleteOne({actId:actId},function(err,data){
+    activitymodel.deleteOne({_id:actId},function(err,data){
         console.log(err);
         if(err)
         {

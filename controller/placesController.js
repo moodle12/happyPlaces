@@ -1,9 +1,9 @@
 const placesModel = require("../model/placesModel")
 
 module.exports.addPlace = function (req, res) {
-    let  userID = parseInt(Math.random()*1000000)
+    let  user = req.body.user
     let  placeID = parseInt(Math.random()*1000000)
-    let  activityID = parseInt(Math.random()*1000000)
+    let  activity= req.body.activity
     let placeName = req.body.placeName
     let lat = req.body.lat
     let long = req.body.long
@@ -19,9 +19,9 @@ module.exports.addPlace = function (req, res) {
 
     let places = new placesModel(
         { 
-            "userID": userID, 
+            "user": user, 
             "placeID":placeID,
-            "activityID":activityID,
+            "activity":activity,
             "placeName": placeName,
             "lat":lat,
             "long":long,
@@ -57,7 +57,7 @@ module.exports.addPlace = function (req, res) {
 
 //getAllPlaces
 module.exports.getAllPlaces = function(req,res){
-    placesModel.find(function(err,data){
+    placesModel.find().populate("user").populate("activity").exec(function(err,data){
         console.log(err);
         if(err){
             res.json({
